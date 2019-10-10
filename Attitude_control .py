@@ -129,8 +129,7 @@ while 1:
     pulse = y_angle / 36
     servo_1.ChangeDutyCycle(pulse)
     servo_2.ChangeDutyCycle(-pulse)
-
-
+    
     y_angle = math.radians(y_angle)
     
     """x_difference    = 0                                                                                                 #変位を初期化　　※ロケット発射時は取り除いておく
