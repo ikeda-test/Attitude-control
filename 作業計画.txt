@@ -1,0 +1,34 @@
+①data_measurement.py
+	・measurement.csvを作成
+
+	・ジャイロ&加速度から現在の角度を計測
+
+	・計測データを0.1秒毎にcsvファイルに書き込み
+		・角度
+		・各軸の加速度
+
+
+②data_processing.py
+	・pandasでmeasurement.pyからデータフレームを作成　※pandasライブラリ使用
+
+	・0.1秒毎に計測された角度から各軸に分かれた重力加速度を算出　値はデータフレームから持ってくる
+		・zの重力加速度 = zの加速度 * cos(y_angle)
+		・xの重力加速度 = xの加速度 * cos(y_angle)
+
+	・各軸のセンサーが取得した加速度 ー 各軸の重力加速度 ＝ 各軸のロケットの運動加速度
+
+	・進行方向の加速度を求めるために 運動加速度 * cos(y_angle) をする
+		・zの進行方向の加速度 = zの運動加速度 * cos(y_angle)
+		・xの進行方向の加速度 = xの運動加速度 * cos(y_angle)
+
+	・ロケットの各軸の進行方向の加速度を二回台形積分 → 各軸の変位を求める
+
+	・fly_distance.csvファイルを作成
+
+	・0.1秒ごとのxとzの変位をfly_distance.csvファイルに保存
+
+
+③graph_plot.py
+	・fly_distance.csvファイルを読み込み
+
+	・xの変位とzの変位をグラフにプロット
